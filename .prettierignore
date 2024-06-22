@@ -1,0 +1,5 @@
+# ignore next folder
+.next/
+
+#Ingnore pakage-lock file
+package-lock.json
