@@ -1,5 +1,3 @@
-import Image from 'next/image';
-import { ThemeToggle } from './components/theme-toggle';
 import { Button } from '@/components/ui/button';
 
 export default function Home() {
@@ -9,16 +7,10 @@ export default function Home() {
         <div className="relative items-center w-full px-5 py-12 mx-auto lg:px-16 max-w-7xl md:px-12">
           <div className="max-w-3xl mx-auto text-center">
             <div>
-              ......
-
-
-
               <span className="w-auto px-6 py-4 rounded-full bg-secondary">
                 <span className="text-sm font-medium text-primary">
                   Sort Your notes easily
                 </span>
-              
-              
               </span>
               <h1 className="mt-8 text-3xl font-extrabold tracking-tight lg:text-6xl">
                 Create Notes with ease

@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -6,33 +6,28 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import Link from "next/link";
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import Link from 'next/link';
 
-import { redirect } from "next/navigation";
-import { revalidatePath, unstable_noStore as noStore } from "next/cache";
-import { SubmitButton } from "@/app/components/SubmitButton";
+import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
+import { SubmitButton } from '@/app/components/SubmitButton';
 
-
-export default async function DynamicRoute({
-  params,
-}: {
-  params: { id: string };
-}) {
-//   const { getUser } = getKindeServerSession();
-//   const user = await getUser();
-//   const data = await getData({ userId: user?.id as string, noteId: params.id });
+export default async function DynamicRoute() {
+  //   const { getUser } = getKindeServerSession();
+  //   const user = await getUser();
+  //   const data = await getData({ userId: user?.id as string, noteId: params.id });
 
   async function postData(formData: FormData) {
-    "use server";
-
+    'use server';
+    console.log(formData);
     // if (!user) throw new Error("you are not allowed");
 
-    const title = formData.get("title") as string;
-    const description = formData.get("description") as string;
+    // const title = formData.get('title') as string;
+    // const description = formData.get('description') as string;
 
     // await prisma.note.update({
     //   where: {
@@ -45,25 +40,24 @@ export default async function DynamicRoute({
     //   },
     // });
 
-    revalidatePath("/dashboard");
+    revalidatePath('/dashboard');
 
-    return redirect("/dashboard");
+    return redirect('/dashboard');
   }
-const data = {id:10,title:'Mohsin',description:'ashdasjdh'}
-// {
-//     "extends": "next/core-web-vitals"
-//   }
-// {
-//     "extends": ["next", "prettier"],
-//     "trailingComma": "es5",
-//     "semi": true,
-//     "tabWidth": 2,
-//     "singleQuote": true,
-//     "jsxSingleQuote": true,
-//     "plugins": ["prettier-plugin-tailwindcss"]
-//   }
+  const data = { id: 10, title: 'Mohsin', description: 'ashdasjdh' };
+  // {
+  //     "extends": "next/core-web-vitals"
+  //   }
+  // {
+  //     "extends": ["next", "prettier"],
+  //     "trailingComma": "es5",
+  //     "semi": true,
+  //     "tabWidth": 2,
+  //     "singleQuote": true,
+  //     "jsxSingleQuote": true,
+  //     "plugins": ["prettier-plugin-tailwindcss"]
+  //   }
   return (
-
     <Card>
       <form action={postData}>
         <CardHeader>
