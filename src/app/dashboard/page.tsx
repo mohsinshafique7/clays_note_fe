@@ -15,7 +15,7 @@ function Dashboard() {
         <div className="grid gap-1">
           <h1 className="text-3xl md:text-4xl"> Your Notes</h1>
           <p className="text-lg text-muted-foreground">
-            Here you can see and create new notes
+            Here you can see and create new notes...
           </p>
         </div>
         <Button asChild>
