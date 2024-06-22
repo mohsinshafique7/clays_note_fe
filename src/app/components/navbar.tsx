@@ -8,7 +8,7 @@ export default function Navbar() {
       <div className="container flex items-center justify-between">
         <Link href="/">
           <h1 className="font-bold text-3xl">
-            Marshal<span className="text-primary">Sass</span>{' '}
+            Marshal<span className="text-primary">Sassddd</span>{' '}
           </h1>
         </Link>
         <div className="flex items-center gap-x-5">
