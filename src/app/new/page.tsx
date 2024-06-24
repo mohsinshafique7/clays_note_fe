@@ -12,11 +12,26 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import AxiosInstance from '../../lib/axiosConfig';
+import { CreateUpdateNote } from '../../../types';
+const createNewNotes = async (data: CreateUpdateNote) => {
+  await AxiosInstance.post('/notes', data);
+};
 
 export default function NewNote() {
+  async function postData(formData: FormData) {
+    'use server';
+
+    const title = formData.get('title') as string;
+    const description = formData.get('description') as string;
+    await createNewNotes({ title, description });
+    return redirect('/');
+  }
+
   return (
     <Card>
-      <form>
+      <form action={postData}>
         <CardHeader>
           <CardTitle>New Notes</CardTitle>
           <CardDescription>
@@ -37,7 +52,7 @@ export default function NewNote() {
             <Label>Description</Label>
             <Textarea
               name="description"
-              placeholder="Describe your noew as you want"
+              placeholder="Note description goes here...."
               required
             />
           </div>

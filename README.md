@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Notes Application Frontend
+
+
+
+![Image Alt Text](Screenshot.png)
+
+## Overview
+
+This application is a simple and elegant notes manager built using Next.js. It allows users to perform CRUD (Create, Read, Update, Delete) operations on notes. Each note consists of a title, description, and the date it was created. The app leverages Server-Side Rendering (SSR) for optimal performance and uses Tailwind CSS for styling.
+
+## Features
+
+- **Create Notes**: Easily create new notes with a title and description.
+- **Read Notes**: View all your notes with their titles, descriptions, and creation dates.
+- **Update Notes**: Edit the content of existing notes.
+- **Delete Notes**: Remove notes that are no longer needed.
+- **Server-Side Rendering (SSR)**: Ensures fast load times and improves SEO.
+- **Tailwind CSS**: Utilized for modern, responsive, and customizable UI design.
+- **Precommit Hooks**: Ensures code quality with linting and formatting checks before commits.
+- **Commitizen**: Facilitates standardized and meaningful commit messages.
+
+## Tech Stack
+
+- **Next.js**: React framework for SSR and static site generation.
+- **Tailwind CSS**: Utility-first CSS framework for rapid UI development.
+- **Axios**: Promise-based HTTP client for making API requests.
+- **Moment.js**: Library for parsing, validating, manipulating, and formatting dates.
+- **Zod**: TypeScript-first schema declaration and validation library.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (>= 12.x)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/notes-app.git
+   cd notes-app
+   ```
+
+### Running the App
+1. Create network(if not exists before):
+   ```bash
+    docker create network app-network
+   ```
+2. Run docker container:
+   ```bash
+    docker-compose up
+   ```
+
+   The app will be available at [http://localhost:3000](http://localhost:3000).
+
+### Linting and Formatting
+
+To check linting errors and format code:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn lint
+yarn format
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Using Commitizen
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Commitizen helps you to write standardized commit messages. To use it:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+npm run commit
+# or
+yarn commit
+```
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Follow the prompts to write a conventional commit message.
