@@ -29,7 +29,7 @@ This application is a simple and elegant notes manager built using Next.js. It a
 
 ### Prerequisites
 
-- Node.js (>= 12.x)
+- Node.js (>= 18.x)
 - npm or yarn
 
 ### Installation
@@ -37,8 +37,8 @@ This application is a simple and elegant notes manager built using Next.js. It a
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/notes-app.git
-   cd notes-app
+   https://github.com/mohsinshafique7/clays_note_fe.git
+   cd clays_note_fe
    ```
 
 ### Running the App
