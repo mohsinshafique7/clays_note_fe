@@ -14,10 +14,8 @@ const Custom404: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
-      <h1 className="text-6xl font-bold text-gray-800">404</h1>
-      <p className="mt-4 text-xl text-gray-600">
-        Oops! The page you're looking for doesn't exist.
-      </p>
+      <h1 className="text-6xl font-bold text-gray-800">500</h1>
+      <p className="mt-4 text-xl text-gray-600">Internal Server Error</p>
       <div className="mt-8 flex space-x-4">
         <Link href="/" passHref>
           <Button

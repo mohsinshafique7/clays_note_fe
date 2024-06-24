@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Edit, File, LoaderIcon, Trash } from 'lucide-react';
+import { Edit, File } from 'lucide-react';
 import moment from 'moment-timezone';
 import Link from 'next/link';
 import AxiosInstance from '../lib/axiosConfig';

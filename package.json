@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "npx eslint src --ext ts,tsx,js,jsx --report-unused-disable-directives --max-warnings 0",
-    "lint-fix": "npx eslint src --ext ts,tsx,js,jsx --fix",
+    "lint:fix": "npx eslint src --ext ts,tsx,js,jsx --fix",
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore .",
     "prepare": "husky",
