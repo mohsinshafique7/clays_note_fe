@@ -1,12 +1,10 @@
-// pages/404.tsx
-
 'use client';
 import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 const Custom404: React.FC = () => {
-  const router = useRouter(); // Use useNavigate hook from next/navigation
+  const router = useRouter();
 
   const handleRetry = () => {
     router.refresh();
@@ -19,8 +17,7 @@ const Custom404: React.FC = () => {
       <div className="mt-8 flex space-x-4">
         <Link href="/" passHref>
           <Button
-            as="a"
-            variant="primary"
+            variant="link"
             className="bg-primary hover:bg-accent hover:text-accent-foreground text-white"
           >
             Go to Index

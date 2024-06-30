@@ -16,7 +16,7 @@ import { redirect } from 'next/navigation';
 import { revalidatePath, unstable_noStore as noStore } from 'next/cache';
 import AxiosInstance from '../../../lib/axiosConfig';
 import { CreateUpdateNote, Note } from '../../../../types';
-const getSingleNotes = async (id: string) => {
+const getSingleNotes = async (id: string): Promise<Note> => {
   noStore();
   const data = await AxiosInstance.get(`/notes/${id}`);
   return data.data.row;
@@ -31,7 +31,7 @@ export default async function DynamicRoute({
   params: { id: string };
 }) {
   const data: Note = await getSingleNotes(params.id);
-  async function postData(formData: FormData) {
+  async function updateData(formData: FormData) {
     'use server';
     const title = formData.get('title') as string;
     const description = formData.get('description') as string;
@@ -42,7 +42,7 @@ export default async function DynamicRoute({
   }
   return (
     <Card>
-      <form action={postData}>
+      <form action={updateData}>
         <CardHeader>
           <CardTitle>Edit Note</CardTitle>
           <CardDescription>

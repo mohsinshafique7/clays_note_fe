@@ -31,7 +31,7 @@ async function deleteNote(formData: FormData) {
   const schema = z.object({
     noteId: z.string().nullish(),
   });
-  console.log(noteId, typeof noteId);
+
   if (validateSchema(schema)) return;
 
   await AxiosInstance.delete(`/notes/${noteId}`);
