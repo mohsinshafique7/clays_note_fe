@@ -45,7 +45,7 @@ This application is a simple and elegant notes manager built using Next.js. It a
 
 1. Create network(if not exists before):
    ```bash
-    docker create network app-network
+    docker network create app-network
    ```
 2. Run docker container:
 
