@@ -15,6 +15,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import AxiosInstance from '../../lib/axiosConfig';
 import { CreateUpdateNote } from '../../../types';
+import { createUpdateNoteSchema } from '@/validators/validatores';
 const createNewNotes = async (data: CreateUpdateNote) => {
   await AxiosInstance.post('/notes', data);
 };
@@ -25,8 +26,13 @@ export default function NewNote() {
 
     const title = formData.get('title') as string;
     const description = formData.get('description') as string;
-    await createNewNotes({ title, description });
-    return redirect('/');
+    const valid = createUpdateNoteSchema.safeParse({ title, description });
+    if (valid.success) {
+      await createNewNotes({ title, description });
+      return redirect('/');
+    } else {
+      throw new Error('Internal Server Error');
+    }
   }
 
   return (

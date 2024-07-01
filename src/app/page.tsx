@@ -6,9 +6,8 @@ import Link from 'next/link';
 import AxiosInstance from '../lib/axiosConfig';
 import { revalidatePath, unstable_noStore as noStore } from 'next/cache';
 import { TrashDelete } from './components/SubmitButton';
-import { z } from 'zod';
 import { Note } from '../../types';
-import { validateSchema } from '@/lib/zod.lib';
+import { AllNotesSchema, deleteNoteschema } from '@/validators/validatores';
 
 const getAllNotes = async () => {
   noStore();
@@ -21,20 +20,25 @@ const getAllNotes = async () => {
       createdAt: note.createdAt,
     };
   });
-  return formatedData;
+  const result = AllNotesSchema.safeParse(formatedData);
+  if (result.success) {
+    return result.data;
+  } else {
+    throw new Error('Internal Server Error');
+  }
 };
 
 async function deleteNote(formData: FormData) {
   'use server';
 
   const noteId = formData.get('noteId') as string;
-  const schema = z.object({
-    noteId: z.string().nullish(),
-  });
-
-  if (validateSchema(schema)) return;
-
-  await AxiosInstance.delete(`/notes/${noteId}`);
+  const valid = deleteNoteschema.safeParse({ noteId });
+  if (valid.success) {
+    const {
+      data: { noteId },
+    } = valid;
+    await AxiosInstance.delete(`/notes/${noteId}`);
+  }
 
   revalidatePath('/');
 }
@@ -53,7 +57,7 @@ async function Home() {
           <Link href="/new">Create a new Note</Link>
         </Button>
       </div>
-      {notesData.length < 1 ? (
+      {notesData && notesData.length < 1 ? (
         <div className="flex min-h-[400px] flex-col items-center justify-center rounded-md boarder-md boarder-dashboard p-8 text-center animate-in fade-in-50">
           <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
             <File className="w-10 h-10 text-primary" />

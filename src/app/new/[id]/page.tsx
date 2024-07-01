@@ -18,12 +18,19 @@ import AxiosInstance from '../../../lib/axiosConfig';
 import { CreateUpdateNote, Note } from '../../../../types';
 import { Suspense } from 'react';
 import { Loader2 } from 'lucide-react';
+import { NoteSchema, createUpdateNoteSchema } from '@/validators/validatores';
 const getSingleNotes = async (id: string): Promise<Note> => {
   noStore();
-  const data = await AxiosInstance.get(`/notes/${id}`);
-  return data.data.row;
+  const response = await AxiosInstance.get(`/notes/${id}`);
+  console.log(response.data.row);
+  const result = NoteSchema.safeParse(response.data.row);
+  if (!result.success) {
+    throw new Error('Internal Server Error');
+  }
+
+  return result.data;
 };
-const updateNote = async (id: string, data: CreateUpdateNote) => {
+const updateNote = async (id: number, data: CreateUpdateNote) => {
   return await AxiosInstance.patch(`/notes/${id}`, data);
 };
 
@@ -37,10 +44,14 @@ export default async function DynamicRoute({
     'use server';
     const title = formData.get('title') as string;
     const description = formData.get('description') as string;
-    await updateNote(data.id, { title, description });
-    revalidatePath('/');
-
-    return redirect('/');
+    const valid = createUpdateNoteSchema.safeParse({ title, description });
+    if (valid.success) {
+      await updateNote(data.id, { title, description });
+      revalidatePath('/');
+      return redirect('/');
+    } else {
+      throw new Error('Internal Server Error');
+    }
   }
   return (
     <Suspense
