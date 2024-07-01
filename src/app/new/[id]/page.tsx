@@ -16,6 +16,8 @@ import { redirect } from 'next/navigation';
 import { revalidatePath, unstable_noStore as noStore } from 'next/cache';
 import AxiosInstance from '../../../lib/axiosConfig';
 import { CreateUpdateNote, Note } from '../../../../types';
+import { Suspense } from 'react';
+import { Loader2 } from 'lucide-react';
 const getSingleNotes = async (id: string): Promise<Note> => {
   noStore();
   const data = await AxiosInstance.get(`/notes/${id}`);
@@ -41,44 +43,53 @@ export default async function DynamicRoute({
     return redirect('/');
   }
   return (
-    <Card>
-      <form action={updateData}>
-        <CardHeader>
-          <CardTitle>Edit Note</CardTitle>
-          <CardDescription>
-            Right here you can now edit your notes
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-y-5">
-          <div className="gap-y-2 flex flex-col">
-            <Label>Title</Label>
-            <Input
-              required
-              type="text"
-              name="title"
-              placeholder="Title for your note"
-              defaultValue={data?.title}
-            />
-          </div>
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center h-screen w-full">
+          <Loader2 className="mr-2 w-10 h-10 animate-spin" />
+          <p>Loading your favorite Note.......</p>
+        </div>
+      }
+    >
+      <Card>
+        <form action={updateData}>
+          <CardHeader>
+            <CardTitle>Edit Note</CardTitle>
+            <CardDescription>
+              Right here you can now edit your notes
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-y-5">
+            <div className="gap-y-2 flex flex-col">
+              <Label>Title</Label>
+              <Input
+                required
+                type="text"
+                name="title"
+                placeholder="Title for your note"
+                defaultValue={data?.title}
+              />
+            </div>
 
-          <div className="flex flex-col gap-y-2">
-            <Label>Description</Label>
-            <Textarea
-              name="description"
-              placeholder="Describe your note as you want"
-              required
-              defaultValue={data?.description}
-            />
-          </div>
-        </CardContent>
+            <div className="flex flex-col gap-y-2">
+              <Label>Description</Label>
+              <Textarea
+                name="description"
+                placeholder="Describe your note as you want"
+                required
+                defaultValue={data?.description}
+              />
+            </div>
+          </CardContent>
 
-        <CardFooter className="flex justify-between">
-          <Button asChild variant="destructive">
-            <Link href="/">Cancel</Link>
-          </Button>
-          <SubmitButton />
-        </CardFooter>
-      </form>
-    </Card>
+          <CardFooter className="flex justify-between">
+            <Button asChild variant="destructive">
+              <Link href="/">Cancel</Link>
+            </Button>
+            <SubmitButton />
+          </CardFooter>
+        </form>
+      </Card>
+    </Suspense>
   );
 }

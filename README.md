@@ -60,8 +60,8 @@ This application is a simple and elegant notes manager built using Next.js. It a
 To check linting errors and format code:
 
 ```bash
-yarn lint
-yarn format
+npm run lint
+npm run format
 ```
 
 ### Using Commitizen

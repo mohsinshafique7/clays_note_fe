@@ -2,12 +2,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
 const Custom404: React.FC = () => {
-  const router = useRouter();
-
   const handleRetry = () => {
-    router.refresh();
+    window.location.reload();
   };
 
   return (
